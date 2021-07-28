@@ -1,0 +1,39 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52195/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "CUSTOM_TOPIC": "custom-topic",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CUSTOM_PUBSUB": "custom-pubsub"
+      }
+    },
+    "ControllerSample": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "CUSTOM_TOPIC": "custom-topic",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CUSTOM_PUBSUB": "custom-pubsub"
+      },
+      "applicationUrl": "http://localhost:5000/"
+    },
+    "Sample with Dapr": {
+      "commandName": "Executable",
+      "executablePath": "C:\\dapr\\dapr.exe",
+      "commandLineArgs": "run --app-id controller --app-port 5000 -- dotnet run",
+      "workingDirectory": ".",
+      "remoteDebugEnabled": false,
+      "nativeDebugging": false
+    }
+  }
+}
