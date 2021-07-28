@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\*.proto" ProtoRoot="Protos" GrpcServices="None" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapr.Actors.AspNetCore" Version="1.2.0" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.2.0" />
+    <PackageReference Include="Dapr.Client" Version="1.2.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.30.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.13.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.32.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.35.0" PrivateAssets="All" />
+    <PackageReference Include="Google.Api.CommonProtos" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>

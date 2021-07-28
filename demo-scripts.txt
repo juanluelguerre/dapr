@@ -1,0 +1,26 @@
+
+
+
+1) ---- CLIENT - SERVICE INVOCATION  -----
+
+Server (AspNetCore\GrpcServiceSample): dapr run --app-id grpcsample --app-port 5050 --app-protocol grpc -- dotnet run
+Client (Client\ServiceInvocation): dapr run --app-id DaprClient -- dotnet run 0
+
+
+2) ---- CLIENT - STATE MANAGEMENT  -----
+Secret Store: 
+dapr run --app-id DaprClient --components-path .\components\ -- dotnet run 0
+
+State Store:
+dapr run --app-id DaprClient --components-path .\components\ -- dotnet run 1
+
+
+3) ---- CLIENT - PUBLISH-SUBCRIBE  -----
+3.1) Using Dapr Redis component
+Subscriber: dapr run --app-id subscriber --app-port 5000  -- dotnet run
+Publisher: dapr run --app-id publisher -- dotnet run 0
+
+3.2) Using Azure Service Bus
+Azure Service bus:
+Subscriber: dapr run --app-id subscriber --app-port 5000 --components-path ./components -- dotnet run
+Publisher: dapr run --app-id publisher --components-path ./components -- dotnet run 0
