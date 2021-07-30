@@ -26,11 +26,22 @@
             "request": "launch",
             "preLaunchTask": "daprd-debug",
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/StateManagement.dll",
-            "args": ["3"],
+            "args": [
+                "3"
+            ],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
             "postDebugTask": "daprd-down"
+        },
+        {
+            "name": "Docker .NET Core Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/StateManagement.csproj"
+            }
         }
     ]
 }
