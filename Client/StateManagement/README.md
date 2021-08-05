@@ -95,3 +95,9 @@ spec:
       name: redis
       key: redis-password
 ```
+
+Use this statement to install redis without password (not recommended for Production environments)
+```
+helm install redis bitnami/redis --set "usePassword=false"
+```
+So, for this cases, leave password blank, inside above component declaration or inside Kubernetes Secret.

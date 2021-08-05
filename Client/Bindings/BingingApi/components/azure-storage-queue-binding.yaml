@@ -1,0 +1,17 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: bindingeventdemo1
+  namespace: default
+spec:
+  type: bindings.azure.storagequeues
+  version: v1
+  metadata:
+  - name: storageAccount
+    value: "daprbindings"
+  - name: storageAccessKey
+    value: "5JoEITZj3Y7K48gnCfPvutEY/qg2Tt3xFed59ap34P0ioNSKL575gGLGnGudXKVWJl1nn6+niAPhaZNi6u0yig=="
+  - name: queue
+    value: "queuedemo1"
+  - name: ttlInSeconds
+    value: "60"

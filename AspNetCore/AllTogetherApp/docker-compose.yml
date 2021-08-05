@@ -1,0 +1,139 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:  
+  counterservice:
+    image: "dapr.alltogether/counterservice"
+    build:
+      context: .
+      dockerfile: CounterService/Dockerfile
+    ports:
+      - 5002:80      
+      - 50002:50001
+      - 9092:9091
+      - 3502:3500
+    depends_on:
+      - redis
+      - placement     
+      - jaeger 
+      - zipkin
+    networks:
+      - alltogether      
+  counterservice-dapr:
+    image: "daprio/daprd:latest"
+    command: ["./daprd", "-app-id", "counterservice", "-app-port", "5002", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-metrics-port", "9092", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"] 
+    depends_on:       
+      - counterservice
+    volumes:
+      - "./components/:/components"      
+    network_mode: "service:counterservice"
+  
+  weatherservice:
+    image: "dapr.alltogether/weatherservice"
+    build:
+      context: .
+      dockerfile: WeatherService/Dockerfile
+    ports:
+      - 5003:80   
+      - 50003:50001
+      - 9093:9091
+      - 3503:3500
+    depends_on:      
+      - redis
+      - placement
+      - jaeger       
+      - zipkin       
+    networks:
+      - alltogether      
+  weatherservice-dapr:
+    image: "daprio/daprd:latest"
+    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "5003", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-metrics-port", "9093", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]
+    depends_on: 
+      - weatherservice
+    volumes:
+      - "./components/:/components"    
+    network_mode: "service:weatherservice"
+
+  website:
+    image: "dapr.alltogether/website"
+    build:
+      context: .
+      dockerfile: WebSite/Dockerfile
+    ports:
+      - 5001:80
+      - 50001:50001      
+      - 9091:9091
+      - 3501:35001
+    depends_on:      
+      - redis
+      - placement      
+      - jaeger 
+      - zipkin   
+    networks:
+      - alltogether         
+  website-dapr:
+    image: "daprio/daprd:latest"
+    command: ["./daprd", "-app-id", "website", "-app-port", "5001", "-dapr-http-port", "3501", "-dapr-grpc-port", "50001",  "-metrics-port", "9091", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]    
+    depends_on: 
+      - website
+    volumes:
+      - "./components/:/components"            
+    network_mode: "service:website"    
+
+  ############################
+  # Dapr placement service
+  ############################
+  placement:
+    image: "daprio/dapr:latest"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - 50006:50006
+    networks:
+      - alltogether
+  ############################
+  # Redis state store
+  ############################
+  redis:
+    image: "redis:alpine"
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - alltogether
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.22
+    ports:
+      - 16686:16686
+      - 9412:9412
+    depends_on: 
+      - zipkin
+    networks:
+      - alltogether
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
+    ports:
+      - 9410:9410
+      - 9411:9411      
+    environment:
+      - JAEGER_AGENT_HOST=jaeger
+      - JAEGER_AGENT_PORT=9412         
+      - COLLECTOR_ZIPKIN_HOST_PORT=9411
+    networks:
+      - alltogether
+
+  dashboard:
+    image: daprio/dashboard:latest
+    container_name: dashboard
+    ports:
+      - 8080:8080
+    networks:
+      - alltogether
+
+networks:
+  alltogether:      

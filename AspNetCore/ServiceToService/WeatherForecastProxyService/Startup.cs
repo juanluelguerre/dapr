@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace WeatherForecastProxyService
 {
@@ -12,10 +14,10 @@ namespace WeatherForecastProxyService
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration;            
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -25,8 +27,24 @@ namespace WeatherForecastProxyService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherForecastProxyService", Version = "v1" });
             });
-            services.AddSingleton<IWeatherForecastClient, WeatherForecastClient>(
-                _ => new WeatherForecastClient(DaprClient.CreateInvokeHttpClient("backend")));
+
+            bool useDaprInvoke = Configuration.GetValue("UseDaprInvoke", false);
+            if (!useDaprInvoke)
+            {
+                // Issue: https://github.com/dapr/dotnet-sdk/issues/632                
+                services.AddSingleton<IWeatherForecastClient, WeatherForecastClient>(
+                    _ => new WeatherForecastClient(DaprClient.CreateInvokeHttpClient("backend")));                                
+            }
+            else
+            {
+                // services.AddDaprClient();
+                var daprHttpPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3500";
+                var daprGrpcPort = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT") ?? "50000";
+                services.AddDaprClient(builder => builder
+                    .UseHttpEndpoint($"http://localhost:{daprHttpPort}")
+                    .UseGrpcEndpoint($"http://localhost:{daprGrpcPort}"));
+                services.AddSingleton<IWeatherForecastClient, WeatherForecastInvokeClient>();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
