@@ -8,11 +8,11 @@ namespace WeatherForecastProxyService
 {
     public class WeatherForecastClient : IWeatherForecastClient
     {
-        private readonly HttpClient _backendHttpClient;
+        private readonly HttpClient _backendHttpClient;        
 
         public WeatherForecastClient(HttpClient backendHttpClient)
         {
-            _backendHttpClient = backendHttpClient;
+            _backendHttpClient = backendHttpClient;            
         }
 
         public async Task<IEnumerable<WeatherForecast>> GetWeatherForecast(int count)

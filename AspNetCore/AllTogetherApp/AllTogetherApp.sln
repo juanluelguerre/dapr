@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite\WebSite.csproj", "{AD07BCFB-453A-442E-8E53-DB7C52D23EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSite", "WebSite\WebSite.csproj", "{AD07BCFB-453A-442E-8E53-DB7C52D23EEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterService", "CounterService\CounterService.csproj", "{86FC4C27-AACD-47D0-88C6-24643DFB872D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterService", "CounterService\CounterService.csproj", "{86FC4C27-AACD-47D0-88C6-24643DFB872D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WeatherService\WeatherService.csproj", "{546979E5-2BF2-4EA0-B7D1-60D09365D394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherService", "WeatherService\WeatherService.csproj", "{546979E5-2BF2-4EA0-B7D1-60D09365D394}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AD07BCFB-453A-442E-8E53-DB7C52D23EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +55,11 @@ Global
 		{546979E5-2BF2-4EA0-B7D1-60D09365D394}.Release|x64.Build.0 = Release|Any CPU
 		{546979E5-2BF2-4EA0-B7D1-60D09365D394}.Release|x86.ActiveCfg = Release|Any CPU
 		{546979E5-2BF2-4EA0-B7D1-60D09365D394}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4623F138-4E4B-4B40-BBB4-747296EB0253}
 	EndGlobalSection
 EndGlobal

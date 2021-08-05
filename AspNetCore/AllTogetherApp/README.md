@@ -4,7 +4,7 @@ This sample app demonstrates how to use [.NET Dapr SDK](https://github.com/dapr/
 It leverage [Dapr SideKick](https://github.com/man-group/dapr-sidekick-dotnet) to be able to start easily the Dapr sidecar from your application or services.
 It also shows the usage of Jaeger for distributed traces.
 
-It was created for DevApps meetup "Saison 04 Episode 07" (in French), [watch it on YouTube](https://youtu.be/XtASb2tmo5c?t=119) and [download the slides](https://laurentkempe.com/presentations/Introduction%20to%20Dapr%20.NET%20SDK/Introduction%20to%20Dapr%20.NET%20SDK.pptx).
+It was created from https://github.com/laurentkempe/daprPlayground/tree/master/sampleApp 
 
 * WebSite, a Blazor server application, uses **Dapr State** to retrieve/store a counter state and **Dapr Pub/Sub** to publish an event.
 * CounterService, a ASP.NET 5 WebApi, uses Dapr Pub/Sub to **subscribe** to the event and log it.
@@ -22,3 +22,15 @@ You can start WebSite and CounterService `.\start.ps1` (it needs Windows Termina
 
 
 Thanks to https://laurentkempe.com to share.
+
+# Multi-container Dapr application (docker-compose
+Sample based on: https://docs.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/getting-started#build-a-multi-container-dapr-application 
+
+```
+docker compose build
+docker compose up
+```
+
+```
+
+```

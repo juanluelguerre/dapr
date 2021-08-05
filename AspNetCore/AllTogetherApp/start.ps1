@@ -8,4 +8,4 @@ $cmd = '-M -w -1 nt -d . ' + $WebSite + '; split-pane -d . ' + $WeatherService +
 
 Start-Process wt $cmd
 Start-Process http://localhost:16686/search
-Start-Process https://localhost:5001/
+Start-Process http://localhost:5000/

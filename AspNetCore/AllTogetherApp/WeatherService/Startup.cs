@@ -39,7 +39,8 @@ namespace WeatherService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherService v1"));
             }
 
-            app.UseHttpsRedirection();
+            // It doesn't work for Dapr
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
