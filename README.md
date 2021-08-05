@@ -1,5 +1,6 @@
 # Dapr examples 
 Some experiments around [Dapr](https://dapr.io/) to learn.
+[More detail about this examples on my blog](https://elguerre.com/category/dapr/)
 
 *This repository contains a samples that highlight the Dapr .NET SDK capabilities from: [DotNet SDK samples](https://github.com/dapr/dotnet-sdk/tree/master/examples)*
 

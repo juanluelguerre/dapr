@@ -4,3 +4,4 @@
 - [Controller Sample](./ControllerSample): How to use Dapr with ASP.NET Core controllers
 - [gRPC Sample](./GrpcServiceSample): How to run Dapr with the ASP.NET gRPC integration
 - [Secret Store Configuration](./SecretStoreConfigurationProviderSample)
+- [Service To Service Invocation](./ServiceToService) 
