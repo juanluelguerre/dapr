@@ -1,0 +1,15 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+  namespace: default
+spec:
+  type: state.azure.tablestorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: "daprdemo1" # <- Update according to Azure Storage Account name
+  - name: accountKey
+    value: "<AZURE-STORAGE-ACCOUNT-KEY>"
+  - name: tableName
+    value: daprdemotable # <- Update according to Azure Storage table name, once you shoud be created previously

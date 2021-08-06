@@ -22,10 +22,14 @@ namespace Samples.Client
             using var client = new DaprClientBuilder().Build();
 
             var state = new Widget() { Size = "small", Color = "yellow", };
-            await client.SaveStateAsync(storeName, stateKeyName, state, cancellationToken: cancellationToken);
+            await client.SaveStateAsync(storeName,
+                                stateKeyName, state,
+                                cancellationToken: cancellationToken);
             Console.WriteLine("Saved State!");
 
-            state = await client.GetStateAsync<Widget>(storeName, stateKeyName, cancellationToken: cancellationToken);
+            state = await client.GetStateAsync<Widget>(storeName,
+                                                    stateKeyName,
+                                                    cancellationToken: cancellationToken);
             if (state == null)
             {
                 Console.WriteLine("State not found in store");
@@ -35,8 +39,11 @@ namespace Samples.Client
                 Console.WriteLine($"Got State: {state.Size} {state.Color}");
             }
 
-            await client.DeleteStateAsync(storeName, stateKeyName, cancellationToken: cancellationToken);
-            Console.WriteLine("Deleted State!");
+            // TODO: Just Comment to be sure after run the example we can query results !
+            // await client.DeleteStateAsync(storeName,
+            //                             stateKeyName,
+            //                             cancellationToken: cancellationToken);
+            // Console.WriteLine("Deleted State!");
         }
 
         private class Widget
