@@ -17,7 +17,7 @@ dapr run --app-id subscriber --app-port 5000  -- dotnet run
 or, to run using **Azure Service Bus**
 
 ```sh
-dapr run --app-id subscriber --app-port 5000 --components-path ./components -- dotnet run
+dapr run --app-id subscriber --app-port 5000 --components-path ../dapr/components -- dotnet run
 ```
 
 Folder components include a Dapr component 

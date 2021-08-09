@@ -12,13 +12,13 @@
 To run the sample locally run this command in the DaprClient directory:
 
 ```sh
-dapr run --app-id DaprClient -- dotnet run <sample number>
+dapr run --app-id publisher -- dotnet run <sample number>
 ```
 
 Running the following command will output a list of the samples included:
 
 ```sh
-dapr run --app-id DaprClient -- dotnet run
+dapr run --app-id publisher -- dotnet run
 ```
 
 Press Ctrl+C to exit, and then run the command again and provide a sample number to run the samples.
@@ -26,9 +26,9 @@ Press Ctrl+C to exit, and then run the command again and provide a sample number
 For example run this command to run the 0th sample from the list produced earlier.
 
 ```sh
-dapr run --app-id DaprClient -- dotnet run 0
+dapr run --app-id publisher -- dotnet run 0
 ```
 
 ## Publishing Pub/Sub Events
 
-See [PublishEventExample.cs](./PublishEventExample.cs) for an example using the `DaprClient` to publish a pub/sub event.
+See [PublishEventExample.cs](./PublishEventExample.cs) for an example using the `publisher` to publish a pub/sub event.
