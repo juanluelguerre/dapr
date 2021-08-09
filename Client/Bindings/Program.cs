@@ -1,33 +1,26 @@
-﻿using Dapr.Client;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bindings
+namespace BingingApi
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            const string bindingName = "bindingdemo1";
-            const string operationName = "op1";
-
-            var data = new DataBinding() { Id = 1, Name = "demo" };
-            using var daprClient = new DaprClientBuilder().Build();
-
-            // Send (Output Binding)
-            // await daprClient.InvokeBindingAsync(bindingName, operationName, data);
-
-            
-
-
-
+            CreateHostBuilder(args).Build().Run();
         }
-    }
 
-
-    public class DataBinding
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

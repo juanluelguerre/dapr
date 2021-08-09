@@ -13,10 +13,10 @@ namespace Samples.Client
     {
         private static readonly Example[] Examples = new Example[]
         {
-            new SecretStoreManagement(),
             new StateStoreExample(),
             new StateStoreTransactionsExample(),
-            new StateStoreETagsExample()            
+            new StateStoreETagsExample(),
+            new SecretStoreManagement()
         };
 
         static async Task<int> Main(string[] args)
