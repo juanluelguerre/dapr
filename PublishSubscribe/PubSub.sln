@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Subscriber", "Subscriber\Subscriber.csproj", "{9F570BFC-B133-4909-901D-0A8A52890E27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publisher", "Publisher\Publisher.csproj", "{BEA0ACEB-1917-413C-AF02-6EA111919C7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dapr", "dapr", "{4F91BCD7-866D-42F3-91B2-8EA22E184E3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{3EE2049F-7754-4342-AC00-0D175F31382F}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\local.pubsub.yaml.txt = dapr\components\local.pubsub.yaml.txt
+		dapr\components\servicebus-publish.pubsub.yaml = dapr\components\servicebus-publish.pubsub.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F570BFC-B133-4909-901D-0A8A52890E27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F570BFC-B133-4909-901D-0A8A52890E27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F570BFC-B133-4909-901D-0A8A52890E27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F570BFC-B133-4909-901D-0A8A52890E27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEA0ACEB-1917-413C-AF02-6EA111919C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEA0ACEB-1917-413C-AF02-6EA111919C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEA0ACEB-1917-413C-AF02-6EA111919C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEA0ACEB-1917-413C-AF02-6EA111919C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EE2049F-7754-4342-AC00-0D175F31382F} = {4F91BCD7-866D-42F3-91B2-8EA22E184E3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5D9B80C-FEA2-4264-A53A-AF0045CBCE31}
+	EndGlobalSection
+EndGlobal
