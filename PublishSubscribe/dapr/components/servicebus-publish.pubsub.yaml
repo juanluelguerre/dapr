@@ -1,0 +1,43 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: pubsub
+  namespace: default
+spec:
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+  - name: connectionString # Required    
+    value: "Endpoint=sb://dapr-servicebus-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=x35zNZ/c2UK+6ovkvMiTB/zevvshBZHpdkS/PXtCSJw="
+  # - name: timeoutInSec # Optional
+  #   value: 60
+  # - name: handlerTimeoutInSec # Optional
+  #   value: 60
+  # - name: disableEntityManagement # Optional
+  #   value: "false"
+  # - name: maxDeliveryCount # Optional
+  #   value: 3
+  # - name: lockDurationInSec # Optional
+  #   value: 60
+  # - name: lockRenewalInSec # Optional
+  #   value: 20
+  # - name: maxActiveMessages # Optional
+  #   value: 2000
+  # - name: maxActiveMessagesRecoveryInSec # Optional
+  #   value: 2
+  # - name: maxConcurrentHandlers # Optional
+  #   value: 10
+  # - name: prefetchCount # Optional
+  #   value: 5
+  # - name: defaultMessageTimeToLiveInSec # Optional
+  #   value: 10
+  # - name: autoDeleteOnIdleInSec # Optional
+  #   value: 10
+  # - name: maxReconnectionAttempts # Optional
+  #   value: 30
+  # - name: connectionRecoveryInSec # Optional
+  #   value: 2
+  # - name: publishMaxRetries # Optional
+  #   value: 5
+  # - name: publishInitialRetryInternalInMs # Optional
+  #   value: 500
