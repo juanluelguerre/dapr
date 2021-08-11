@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-proxy",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/WeatherForecastProxyService/WeatherForecastProxyService.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-backend",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/WeatherForecastService/WeatherForecastService.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },       
+        {
+            "appId": "proxy",            
+            "label": "daprd-debug-proxy",
+            "type": "daprd",
+            "dependsOn": ["build-proxy"],
+            "appPort": 6001,
+            "httpPort": 3501,            
+            "grpcPort": 50001,            
+            "appSsl": true
+        },
+        {
+            "appId": "proxy",
+            "label": "daprd-down-proxy",
+            "type": "daprd-down"
+        },
+        {
+            "appId": "backend",            
+            "label": "daprd-debug-backend",
+            "type": "daprd",
+            "dependsOn": "build-backend",
+            "appPort": 5001,
+            "httpPort": 3500,            
+            "grpcPort": 50002,            
+            "appSsl": true,            
+        },
+        {
+            "appId": "backend",
+            "label": "daprd-down-backend",
+            "type": "daprd-down"
+        }
+    ]
+}
