@@ -32,7 +32,8 @@
             "dependsOn": ["build-proxy"],
             "appPort": 6001,
             "httpPort": 3501,            
-            "grpcPort": 50001,            
+            "grpcPort": 50001,      
+            "metricsPort": 9091,      
             "appSsl": true
         },
         {
@@ -47,7 +48,8 @@
             "dependsOn": "build-backend",
             "appPort": 5001,
             "httpPort": 3500,            
-            "grpcPort": 50002,            
+            "grpcPort": 50002,  
+            "metricsPort": 9092,          
             "appSsl": true,            
         },
         {
