@@ -1,0 +1,103 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch (proxy)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-proxy",
+      "program": "${workspaceFolder}/WeatherForecastProxyService/bin/Debug/net5.0/WeatherForecastProxyService.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/WeatherForecastProxyService",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "Launch (backend)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-backend",
+      "program": "${workspaceFolder}/WeatherForecastService/bin/Debug/net5.0/WeatherForecastService.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/WeatherForecastService",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "Launch (proxy) with Dapr",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "daprd-debug-proxy",
+      "program": "${workspaceFolder}/WeatherForecastProxyService/bin/Debug/net5.0/WeatherForecastProxyService.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/WeatherForecastProxyService",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      },
+      "postDebugTask": "daprd-down-proxy"
+    },
+    {
+      "name": "Launch (backend) with Dapr",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "daprd-debug-backend",
+      "program": "${workspaceFolder}/WeatherForecastService/bin/Debug/net5.0/WeatherForecastService.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/WeatherForecastService",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      },
+      "postDebugTask": "daprd-down-backend"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Proxy & Backend",
+      "configurations": [
+        "Launch (proxy)",
+        "Launch (backend)"
+      ]
+    },
+    {
+      "name": "Proxy & Backend (with Dapr)",
+      "configurations": [
+        "Launch (backend) with Dapr",
+        "Launch (proxy) with Dapr"
+      ]
+    }
+  ]
+}

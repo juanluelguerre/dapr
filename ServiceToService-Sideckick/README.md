@@ -1,8 +1,6 @@
 ﻿# Service to Service with Dapr SDK
 
-This sample demonstrates how to use Dapr SDK in a Service to Service call.
-
-You can read more about it on the blog post "[Introducción a Dapr .NET SDK y "Service-to-service invocation"](https://elguerre.com/2021/08/05/introduccion-a-dapr-net-sdk-y-service-to-service-invocation/)".
+This sample demonstrates how to use Dapr SDK in a Service to Service call and also debuging it using Visual Studio 2019/2022 thanks to: https://github.com/man-group/dapr-sidekick-dotnet
 
 # Try
 
@@ -19,5 +17,21 @@ When both sidecars are running use `client.http` to make a request to the proxy 
 
 See name resolution by changing the port from `http://localhost:3500` to `http://localhost:3501`, showing that calling any sidecar routes correctly the call.
 
----
-Thanks @laurentKempe to make me easy the way to learn Dapr !
+## Visual Studio 2019/2022
+```
+<ItemGroup>
+  <PackageReference Include="Man.Dapr.Sidekick.AspNetCore" Version="1.1.0" />
+</ItemGroup>
+```
+Next modify the ConfigureServices method in Startup.cs as follows:
+
+```
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+
+    // Add Dapr Sidekick
+    services.AddDaprSidekick(Configuration);
+}
+```
+

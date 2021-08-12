@@ -35,8 +35,7 @@ namespace Samples.Client
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "subscriber v1"));
             }
-            
-            // 2 - A) Daper doesn’t work for HTTPS: https://github.com/dapr/dapr/issues/1242
+                        
             // app.UseHttpsRedirection();
 
             app.UseRouting();
