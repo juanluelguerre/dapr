@@ -35,7 +35,8 @@ namespace Samples.Client
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "subscriber v1"));
             }
-                        
+            
+            // Require --app-ssl arguments tu run under Dapr
             // app.UseHttpsRedirection();
 
             app.UseRouting();

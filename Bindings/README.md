@@ -30,5 +30,5 @@ dapr run --app-id bindingeventdemo1 `
     --dapr-http-port 3500 `
     --dapr-grpc-port 50000 `
     --components-path ./dapr/components `
-    dotnet run
+    dotnet run -p ./ApiApp/ApiApp.csproj
 ```
