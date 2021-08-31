@@ -7,6 +7,6 @@ spec:
   tracing:
     samplingRate: "1"
     zipkin:
-      # endpointAddress: "http://localhost:9412/api/v2/spans"
-      endpointAddress: "http://zipkin:9411/api/v2/spans" # <- internal port specified
+      endpointAddress: "http://localhost:9412/api/v2/spans" # <- TODO: uncomment to use localhost 
+      # endpointAddress: "http://zipkin:9411/api/v2/spans" # <- internal port specified. TODO: uncomment to use docker compose
       

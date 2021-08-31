@@ -1,16 +1,16 @@
 ﻿apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: counter-store
+  name: pubsub
   namespace: default
 spec:
-  type: state.redis
+  type: pubsub.redis
   version: v1
   metadata:
     - name: redisHost
-      value: localhost:6379 # <- TODO: uncomment to use localhost
-      # value: redis:6379 # <- TODO: uncomment to use docker compose
+      # value: localhost:6379 # <- TODO: uncomment to use localhost
+      value: redis:6379 # <-TODO: uncomment to use  docker compose
     - name: redisPassword
       value: ""
     # - name: actorStateStore
-    #   value: "true"
+    #   value: "true"      

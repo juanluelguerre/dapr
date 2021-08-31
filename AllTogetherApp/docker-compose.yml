@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 services:
   website:
@@ -8,23 +8,32 @@ services:
       dockerfile: WebSite/Dockerfile
     ports:
       - 5000:80
-    depends_on:      
+      - 5001:443      
+    depends_on:
       - redis
       - placement   
-    # environment: 
-    #   - DAPR_HTTP_PORT=3500
-    #   - DAPR_GRPC_PORT=50000
+    environment: 
+    #  - ASPNETCORE_ENVIRONMENT=Development    
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password1
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx     
+    volumes:      
+      - ~/.aspnet/https:/https:ro
     networks:
-      - alltogether         
+      - alltogether   
+        
   website-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "website", "-app-port", "80", "-dapr-http-port", "3500", "-dapr-grpc-port", "50000", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]    
+    command: ["./daprd", "-app-id", "website", "-app-port", "443", "-dapr-http-port", "3500", "-dapr-grpc-port", "50001", "-app-ssl", "-placement-host-address", "placement:50006", "-components-path", "/components", "-config", "/components/config.yaml"]    
     depends_on: 
       - website
     volumes:
-      - "./components/:/components"            
+      - ./components/docker-compose:/components
     network_mode: "service:website" 
-    
+
+  ######################################################
+
   counterservice:
     image: "dapr.alltogether/counterservice"
     build:
@@ -32,23 +41,31 @@ services:
       dockerfile: CounterService/Dockerfile
     ports:
       - 5002:80
+      - 5004:443     
     depends_on:
       - redis
       - placement
-    # environment: 
-    #   - DAPR_HTTP_PORT=3502
-    #   - DAPR_GRPC_PORT=50002
+    environment: 
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=5004
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password1
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx    
+    volumes:      
+      - ~/.aspnet/https:/https:ro
     networks:
-      - alltogether      
+      - alltogether   
+
   counterservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "counterservice", "-app-port", "80", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"] 
+    command: ["./daprd", "-app-id", "counterservice", "-app-port", "443", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-app-ssl", "-placement-host-address", "placement:50006", "-components-path", "/components", "-config", "/components/config.yaml"] 
     depends_on:       
       - counterservice
-    volumes:
-      - "./components/:/components"      
+    volumes:      
+      - ./components/docker-compose:/components
     network_mode: "service:counterservice"
   
+  ######################################################
+
   weatherservice:
     image: "dapr.alltogether/weatherservice"
     build:
@@ -56,21 +73,28 @@ services:
       dockerfile: WeatherService/Dockerfile
     ports:
       - 5003:80
+      - 5005:443      
     depends_on:      
       - placement    
-    # environment: 
-    #   - DAPR_HTTP_PORT=3503
-    #   - DAPR_GRPC_PORT=50003
+    environment: 
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=5005
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password1
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx     
+    volumes:      
+      - ~/.aspnet/https:/https:ro
     networks:
-      - alltogether      
+      - alltogether     
+       
   weatherservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "80", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-placement-host-address", "placement:50006"]
+    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "443", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-app-ssl", "-placement-host-address", "placement:50006"]
     depends_on: 
       - weatherservice
+    volumes:
+      - ~/.aspnet/https:/https:ro
     network_mode: "service:weatherservice"   
 
-  ########################################################
   # Dapr placement service. Only when Actors are involved
   ########################################################
   placement:
@@ -80,9 +104,9 @@ services:
       - 50006:50006
     networks:
       - alltogether
-  ############################
+  
   # Redis state store
-  ############################
+  ###################
   redis:
     image: "redis:alpine"
     hostname: redis
@@ -128,7 +152,7 @@ services:
     ports:
       - 8081:8080
     networks:
-      - alltogether       
+      - alltogether
 
 networks:
   alltogether:

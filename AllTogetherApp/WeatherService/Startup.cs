@@ -39,15 +39,14 @@ namespace WeatherService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherService v1"));
             }
             
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/health");
+            {                
                 endpoints.MapControllers();                
             });
         }

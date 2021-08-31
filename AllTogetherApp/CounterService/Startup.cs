@@ -38,17 +38,16 @@ namespace Service
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CounterService v1"));
             }
                         
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
             
             app.UseCloudEvents();
 
-            // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHealthChecks("/health");
+            {                
                 endpoints.MapSubscribeHandler();
                 endpoints.MapControllers();                
             });
