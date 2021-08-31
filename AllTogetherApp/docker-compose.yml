@@ -13,7 +13,7 @@ services:
       - redis
       - placement   
     environment: 
-    #  - ASPNETCORE_ENVIRONMENT=Development    
+      # - ASPNETCORE_ENVIRONMENT=Development # <- The 'Urls' param inside appsettings.Development.json cause conflict to take care and use differnts appsettings/environments configuration. Default value is Production.
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=5001
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password1
@@ -46,6 +46,7 @@ services:
       - redis
       - placement
     environment: 
+      # - ASPNETCORE_ENVIRONMENT=Development # <- The 'Urls' param inside appsettings.Development.json cause conflict to take care and use differnts appsettings/environments configuration. Default value is Production.
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=5004
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password1
@@ -77,6 +78,7 @@ services:
     depends_on:      
       - placement    
     environment: 
+      # - ASPNETCORE_ENVIRONMENT=Development # <- The 'Urls' param inside appsettings.Development.json cause conflict to take care and use differnts appsettings/environments configuration. Default value is Production.
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_HTTPS_PORT=5005
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password1

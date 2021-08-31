@@ -4,8 +4,6 @@ metadata:
   name: tracing
   namespace: default
 spec:
-  # mtls:
-  #   enabled: true
   tracing:
     samplingRate: "1"
     zipkin:
