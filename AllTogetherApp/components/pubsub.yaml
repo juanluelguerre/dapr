@@ -8,7 +8,9 @@ spec:
   version: v1
   metadata:
     - name: redisHost
-      value: localhost:6379 # <- localhost
-      # value: redis:6379 # <- docker compose
+      # value: localhost:6379 # <- localhost
+      value: redis:6379 # <- docker compose
     - name: redisPassword
       value: ""
+    # - name: actorStateStore
+    #   value: "true"      

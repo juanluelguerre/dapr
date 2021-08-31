@@ -9,6 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterService", "CounterSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherService", "WeatherService\WeatherService.csproj", "{546979E5-2BF2-4EA0-B7D1-60D09365D394}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{7DBB90BE-4FA8-431A-91D9-49500AB9BE81}"
+	ProjectSection(SolutionItems) = preProject
+		components\config.yaml = components\config.yaml
+		components\pubsub.yaml = components\pubsub.yaml
+		components\statestore.yaml = components\statestore.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

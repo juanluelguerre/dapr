@@ -37,8 +37,7 @@ namespace Service
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CounterService v1"));
             }
-            
-            // It doesn't work for Dapr
+                        
             // app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -49,8 +48,9 @@ namespace Service
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapSubscribeHandler();
-                endpoints.MapControllers();
+                endpoints.MapControllers();                
             });
         }
     }

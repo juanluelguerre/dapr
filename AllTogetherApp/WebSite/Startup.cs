@@ -50,9 +50,9 @@ namespace WebSite
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
             }
-
-            // It doesn't work for Dapr
+            
             // app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -60,7 +60,7 @@ namespace WebSite
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapFallbackToPage("/_Host");                
             });
         }
     }

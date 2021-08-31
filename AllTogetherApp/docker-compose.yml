@@ -7,20 +7,18 @@ services:
       context: .
       dockerfile: WebSite/Dockerfile
     ports:
-      - 5000:80      
-      - 50001:50001
-      - 3500:3500
+      - 5000:80
     depends_on:      
       - redis
       - placement   
-    environment: 
-      - DAPR_HTTP_PORT=3500
-      - DAPR_GRPC_PORT=50001
+    # environment: 
+    #   - DAPR_HTTP_PORT=3500
+    #   - DAPR_GRPC_PORT=50000
     networks:
       - alltogether         
   website-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "website", "-app-port", "5000", "-dapr-http-port", "3500", "-dapr-grpc-port", "50001", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]    
+    command: ["./daprd", "-app-id", "website", "-app-port", "80", "-dapr-http-port", "3500", "-dapr-grpc-port", "50000", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]    
     depends_on: 
       - website
     volumes:
@@ -34,19 +32,17 @@ services:
       dockerfile: CounterService/Dockerfile
     ports:
       - 5002:80
-      - 50002:50001
-      - 3502:3500
     depends_on:
       - redis
       - placement
-    environment: 
-      - DAPR_HTTP_PORT=3502
-      - DAPR_GRPC_PORT=50002
+    # environment: 
+    #   - DAPR_HTTP_PORT=3502
+    #   - DAPR_GRPC_PORT=50002
     networks:
       - alltogether      
   counterservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "counterservice", "-app-port", "5002", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"] 
+    command: ["./daprd", "-app-id", "counterservice", "-app-port", "80", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"] 
     depends_on:       
       - counterservice
     volumes:
@@ -60,23 +56,18 @@ services:
       dockerfile: WeatherService/Dockerfile
     ports:
       - 5003:80
-      - 50003:50001
-      - 3503:3500
     depends_on:      
-      - redis
       - placement    
-    environment: 
-      - DAPR_HTTP_PORT=3503
-      - DAPR_GRPC_PORT=50003
+    # environment: 
+    #   - DAPR_HTTP_PORT=3503
+    #   - DAPR_GRPC_PORT=50003
     networks:
       - alltogether      
   weatherservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "5003", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-placement-host-address", "placement:50006", "-components-path", "./components", "-config", "./components/config.yaml"]
+    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "80", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-placement-host-address", "placement:50006"]
     depends_on: 
       - weatherservice
-    volumes:
-      - "./components/:/components"    
     network_mode: "service:weatherservice"   
 
   ########################################################
@@ -94,6 +85,7 @@ services:
   ############################
   redis:
     image: "redis:alpine"
+    hostname: redis
     ports:
       - 6380:6379
     environment:
@@ -103,12 +95,13 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:1.22
+    # hostname: jaeger
     container_name: jaeger
     ports:
       - 16686:16686
-      - 9414:9412
+      # - 9412:9411
     environment: 
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9413
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
     depends_on: 
       - zipkin
     networks:
@@ -116,26 +109,26 @@ services:
 
   zipkin:
     image: openzipkin/zipkin
+    # hostname: zipkin
     container_name: zipkin
     # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
     ports:
       - 9410:9410
-      - 9413:9411      
+      - 9413:9411
     environment:
       - JAEGER_AGENT_HOST=jaeger
-      - JAEGER_AGENT_PORT=9414         
-      - COLLECTOR_ZIPKIN_HOST_PORT=9413
+      - JAEGER_AGENT_PORT=9411
     networks:
       - alltogether
 
   dashboard:
     image: daprio/dashboard:latest
+    # hostname: dashboard
     container_name: dashboard
     ports:
       - 8081:8080
     networks:
-      - alltogether
+      - alltogether       
 
 networks:
-  alltogether:  
-    external: false
+  alltogether:

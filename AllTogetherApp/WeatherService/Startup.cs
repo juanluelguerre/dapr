@@ -26,7 +26,7 @@ namespace WeatherService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WeatherService", Version = "v1" });
             });
             
-            // services.AddDaprSidekick(Configuration);
+            services.AddDaprSidekick(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +38,7 @@ namespace WeatherService
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WeatherService v1"));
             }
-
-            // It doesn't work for Dapr
+            
             // app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -48,8 +47,8 @@ namespace WeatherService
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapControllers();                
             });
         }
     }
