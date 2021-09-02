@@ -6,7 +6,6 @@ metadata:
 spec:
   tracing:
     samplingRate: "1"
-    zipkin:
-      # endpointAddress: "http://localhost:9412/api/v2/spans"
-      endpointAddress: "http://zipkin:9411/api/v2/spans"
+    zipkin:      
+      endpointAddress: "http://zipkin:9411/api/v2/spans" # <- internal port specified.
       

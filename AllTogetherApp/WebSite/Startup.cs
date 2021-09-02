@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,12 +25,12 @@ namespace WebSite
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
-            // services.AddDaprClient();
-            var daprHttpPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3500";
-            var daprGrpcPort = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT") ?? "50000";
-            services.AddDaprClient(builder => builder
-                .UseHttpEndpoint($"http://localhost:{daprHttpPort}")
-                .UseGrpcEndpoint($"http://localhost:{daprGrpcPort}"));                
+            services.AddDaprClient();
+            // var daprHttpPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3500";
+            // var daprGrpcPort = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT") ?? "50001";
+            // services.AddDaprClient(builder => builder
+            //     .UseHttpEndpoint($"http://localhost:{daprHttpPort}")
+            //     .UseGrpcEndpoint($"http://localhost:{daprGrpcPort}"));                
 
             // Nuget --> Man.Dapr.Sidekick.AspNetCore
             services.AddDaprSidekick(Configuration);
@@ -48,11 +47,11 @@ namespace WebSite
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
+                // app.UseHsts();
             }
+            
+            app.UseHttpsRedirection();
 
-            // It doesn't work for Dapr
-            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -60,7 +59,7 @@ namespace WebSite
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapFallbackToPage("/_Host");                
             });
         }
     }

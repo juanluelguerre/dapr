@@ -37,20 +37,19 @@ namespace Service
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CounterService v1"));
             }
-            
-            // It doesn't work for Dapr
-            // app.UseHttpsRedirection();
+                        
+            app.UseHttpsRedirection();
 
             app.UseRouting();
             
             app.UseCloudEvents();
 
-            // app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {                
                 endpoints.MapSubscribeHandler();
-                endpoints.MapControllers();
+                endpoints.MapControllers();                
             });
         }
     }
