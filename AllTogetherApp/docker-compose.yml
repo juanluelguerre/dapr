@@ -25,7 +25,7 @@ services:
         
   website-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "website", "-app-port", "443", "-dapr-http-port", "3500", "-dapr-grpc-port", "50001", "-app-ssl", "-placement-host-address", "placement:50006", "-components-path", "/components", "-config", "/components/config.yaml"]    
+    command: ["./daprd", "-app-id", "website", "-app-port", "443", "-dapr-http-port", "3500", "-dapr-grpc-port", "50001", "-app-ssl", "-components-path", "/components", "-config", "/components/config.yaml"]    
     depends_on: 
       - website
     volumes:
@@ -58,10 +58,10 @@ services:
 
   counterservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "counterservice", "-app-port", "443", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-app-ssl", "-placement-host-address", "placement:50006", "-components-path", "/components", "-config", "/components/config.yaml"] 
+    command: ["./daprd", "-app-id", "counterservice", "-app-port", "443", "-dapr-http-port", "3502", "-dapr-grpc-port", "50002", "-app-ssl", "-components-path", "/components", "-config", "/components/config.yaml"] 
     depends_on:       
       - counterservice
-    volumes:      
+    volumes:
       - ./components/docker-compose:/components
     network_mode: "service:counterservice"
   
@@ -90,25 +90,14 @@ services:
        
   weatherservice-dapr:
     image: "daprio/daprd:latest"
-    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "443", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-app-ssl", "-placement-host-address", "placement:50006"]
+    command: ["./daprd", "-app-id", "weatherservice", "-app-port", "443", "-dapr-http-port", "3503", "-dapr-grpc-port", "50003", "-app-ssl", "-config", "/components/config.yaml"]
     depends_on: 
       - weatherservice
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ./components/docker-compose:/components
     network_mode: "service:weatherservice"   
 
-  # Dapr placement service. Only when Actors are involved
-  ########################################################
-  placement:
-    image: "daprio/dapr:latest"
-    command: ["./placement", "-port", "50006"]
-    ports:
-      - 50006:50006
-    networks:
-      - alltogether
-  
-  # Redis state store
-  ###################
+  # Redis state store  
   redis:
     image: "redis:alpine"
     hostname: redis
@@ -119,42 +108,54 @@ services:
     networks:
       - alltogether
 
-  jaeger:
-    image: jaegertracing/all-in-one:1.22
-    # hostname: jaeger
-    container_name: jaeger
-    ports:
-      - 16686:16686
-      # - 9412:9411
-    environment: 
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
-    depends_on: 
-      - zipkin
-    networks:
-      - alltogether
-
+  # Observavility
   zipkin:
     image: openzipkin/zipkin
     # hostname: zipkin
     container_name: zipkin
-    # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
-    ports:
-      - 9410:9410
+    ports:      
       - 9413:9411
-    environment:
-      - JAEGER_AGENT_HOST=jaeger
-      - JAEGER_AGENT_PORT=9411
     networks:
       - alltogether
 
-  dashboard:
-    image: daprio/dashboard:latest
-    # hostname: dashboard
-    container_name: dashboard
-    ports:
-      - 8081:8080
-    networks:
-      - alltogether
+  # --- Not used at the momen --- 
+
+  # Observavility
+  # jaeger:
+  #   image: jaegertracing/all-in-one:1.25
+  #   # hostname: jaeger
+  #   container_name: jaeger
+  #   ports:
+  #     - 16686:16686
+  #     # - 9412:9412
+  #   environment:       
+  #     - COLLECTOR_ZIPKIN_HOST_PORT=9411 # <- enabled zipkin to process headers v2: /api/v2/spans. v2 specified inside config.yaml
+  #     # - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+  #   networks:
+  #     - alltogether
+
+  ########################################################
+  # Dapr placement service. Only when Actors are involved
+  ########################################################
+  # Uncomment this placement service and
+  # include arguments: "-placement-host-address", "placement:50006",  in "./dprd" command for each sidecar when need it.
+  # ------------------------------------------------------
+  # placement:
+  #   image: "daprio/dapr:latest"
+  #   command: ["./placement", "-port", "50006"]
+  #   ports:
+  #     - 50006:50006
+  #   networks:
+  #     - alltogether
+    
+
+  # # https://github.com/dapr/dashboard/issues/38
+  # dashboard:
+  #   image: daprio/dashboard:latest
+  #   # hostname: dashboard
+  #   container_name: dashboard
+  #   ports:
+  #     - 8080:8080
 
 networks:
   alltogether:

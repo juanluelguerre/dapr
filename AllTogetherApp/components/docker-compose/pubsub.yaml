@@ -7,9 +7,8 @@ spec:
   type: pubsub.redis
   version: v1
   metadata:
-    - name: redisHost
-      # value: localhost:6379 # <- TODO: uncomment to use localhost
-      value: redis:6379 # <-TODO: uncomment to use  docker compose
+    - name: redisHost      
+      value: redis:6379 # <- Defined inside docker compose file
     - name: redisPassword
       value: ""
     # - name: actorStateStore
