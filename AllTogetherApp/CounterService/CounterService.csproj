@@ -8,20 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\config.yaml" Link="config.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapr.AspNetCore" Version="1.3.0" />
     <PackageReference Include="Man.Dapr.Sidekick.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="components\pubsub.yaml" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
