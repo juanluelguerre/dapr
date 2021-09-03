@@ -30,7 +30,7 @@ namespace WebSite
             // var daprGrpcPort = Environment.GetEnvironmentVariable("DAPR_GRPC_PORT") ?? "50001";
             // services.AddDaprClient(builder => builder
             //     .UseHttpEndpoint($"http://localhost:{daprHttpPort}")
-            //     .UseGrpcEndpoint($"http://localhost:{daprGrpcPort}"));                
+            //     .UseGrpcEndpoint($"http://localhost:{daprGrpcPort}"));
 
             // Nuget --> Man.Dapr.Sidekick.AspNetCore
             services.AddDaprSidekick(Configuration);

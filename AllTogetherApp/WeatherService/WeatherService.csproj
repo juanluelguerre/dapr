@@ -6,12 +6,6 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
  </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\config.yaml" Link="config.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
   <ItemGroup>   
     <PackageReference Include="Man.Dapr.Sidekick.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
