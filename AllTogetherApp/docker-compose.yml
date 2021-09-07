@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   website:
-    image: "dapr.alltogether/website"
+    image: "alltogether.website"
     build:
       context: .
       dockerfile: WebSite/Dockerfile
@@ -29,13 +29,13 @@ services:
     depends_on: 
       - website
     volumes:
-      - ./components/docker-compose:/components
+      - ./dapr/components/docker-compose:/components
     network_mode: "service:website" 
 
   ######################################################
 
   counterservice:
-    image: "dapr.alltogether/counterservice"
+    image: "alltogether.counterservice"
     build:
       context: .
       dockerfile: CounterService/Dockerfile
@@ -62,13 +62,13 @@ services:
     depends_on:       
       - counterservice
     volumes:
-      - ./components/docker-compose:/components
+      - ./dapr/components/docker-compose:/components
     network_mode: "service:counterservice"
   
   ######################################################
 
   weatherservice:
-    image: "dapr.alltogether/weatherservice"
+    image: "alltogether.weatherservice"
     build:
       context: .
       dockerfile: WeatherService/Dockerfile
@@ -94,7 +94,7 @@ services:
     depends_on: 
       - weatherservice
     volumes:
-      - ./components/docker-compose:/components
+      - ./dapr/components/docker-compose:/components
     network_mode: "service:weatherservice"   
 
   # Redis state store  
