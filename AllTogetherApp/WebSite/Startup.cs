@@ -59,7 +59,8 @@ namespace WebSite
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("/_Host");                
+                endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

@@ -47,7 +47,8 @@ namespace WeatherService
 
             app.UseEndpoints(endpoints =>
             {                
-                endpoints.MapControllers();                
+                endpoints.MapControllers(); 
+                endpoints.MapHealthChecks("/health");              
             });
         }
     }

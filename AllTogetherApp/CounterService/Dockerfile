@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["CounterService/CounterService.csproj", "CounterService/"]
+COPY ["CounterService.csproj", "CounterService/"]
 RUN dotnet restore "CounterService/CounterService.csproj"
-COPY . .
-WORKDIR "/src/CounterService"
+COPY . ./CounterService
+WORKDIR /src/CounterService
 RUN dotnet build "CounterService.csproj" -c Release -o /app/build
 
 FROM build AS publish
