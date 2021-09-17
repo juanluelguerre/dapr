@@ -47,3 +47,37 @@ docker compose build
 docker compose up
 ```
 **Note:** Dapr component map components ports, so we don't need to explicit set ports inside componentes. Anyway, it doesn't make sence !!!
+
+# Dapr on Kubernetes
+`dapr init -k` 
+
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install redis bitnami/redis 
+```
+
+Once redis has been created on Kubernetes, a secret is also create with a redis password. So **secretKeyRef** in the bellow .yaml are: "redis" and "redis-password" by default.
+```
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: counter-store
+  namespace: default
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: redis-master.default.svc.cluster.local:6379
+  - name: redisPassword    
+    secretKeyRef:
+      name: redis
+      key: redis-password
+```
+
+Use this statement to install redis without password (not recommended for Production environments)
+```
+helm install redis bitnami/redis --set "usePassword=false"
+```
+So, for this cases, leave password blank, inside above component declaration or inside Kubernetes Secret.

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:  
+  name: {{ .Chart.Name }}
+  labels:        
+    app: {{ .Values.appName }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  strategy:
+    type: {{ .Values.service.strategy }}
+    {{- if .Values.service.rollingUpdateEnabled }}
+    rollingUpdate:
+      maxSurge: 3 # <- avoid issue: nodes are available: 1 node(s) didn't have free ports for the requested pod ports
+      maxUnavailable: 0
+    {{- end }}
+  selector:
+    matchLabels:    
+      app: {{ .Values.appName }}
+      service: {{ .Chart.Name }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Values.appName }}
+        service: {{ .Chart.Name }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["1"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.containerPort }}
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: "http://+:{{ .Values.service.port }}"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      restartPolicy: {{ .Values.service.restartPolicy }}

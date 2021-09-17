@@ -4,7 +4,7 @@ services:
   website:
     image: "alltogether.website"
     build:
-      context: .
+      context: ./WebSite
       dockerfile: WebSite/Dockerfile
     ports:
       - 5000:80
@@ -37,7 +37,7 @@ services:
   counterservice:
     image: "alltogether.counterservice"
     build:
-      context: .
+      context: ./CounterService
       dockerfile: CounterService/Dockerfile
     ports:
       - 5002:80
@@ -70,7 +70,7 @@ services:
   weatherservice:
     image: "alltogether.weatherservice"
     build:
-      context: .
+      context: ./WeatherService
       dockerfile: WeatherService/Dockerfile
     ports:
       - 5003:80

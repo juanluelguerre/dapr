@@ -49,7 +49,8 @@ namespace Service
             app.UseEndpoints(endpoints =>
             {                
                 endpoints.MapSubscribeHandler();
-                endpoints.MapControllers();                
+                endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

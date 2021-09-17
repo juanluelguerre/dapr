@@ -1,0 +1,56 @@
+replicaCount: 1
+
+appName: "AllTogetherApp"
+
+image:  
+  repository: k8sappsregistry.azurecr.io/alltogether.weatherservice # <- local docker
+  pullPolicy: Always #<- IfNotPresent | Always | Never
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+# imagePullSecrets: [ name: "k8sappsregistrykey" ]
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {
+  dapr.io/enabled: "true",
+  dapr.io/app-id: "weatherservice", 
+  dapr.io/config: "tracing",
+  dapr.io/app-port: "80",
+  # dapr.io/app-ssl: "true",
+  dapr.io/log-level: "debug",  
+  # dapr.io/dapr-http: "3505/TCP", # <- not supported
+  # dapr.io/dapr-grpc: "50005/TCP", # <- not supported
+  # dapr-metrics: "9095/TCP",  
+  # dapr.io/sidecar-liveness-probe-delay-seconds: "120",
+  # dapr.io/sidecar-liveness-probe-timeout-second: "10",
+  # dapr.io/sidecar-liveness-probe-period-seconds: "10",
+  # dapr.io/sidecar-readiness-probe-delay-seconds: "120",
+  # dapr.io/sidecar-readiness-probe-timeout-seconds: "10",
+  # dapr.io/sidecar-readiness-probe-period-seconds: "10",  
+}
+
+service:
+  containerPort: 80 # <- port must be expose in Dockerfile
+  strategy: Recreate # <- Recreate | RollingUpdate | ...
+  # rollingUpdateEnabled: true
+  restartPolicy: Always # <- Always | OnFailure | Never
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
