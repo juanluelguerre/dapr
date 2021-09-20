@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceInvocation", "ServiceInvocation.csproj", "{D9FB62AF-6246-4EF3-B901-6D919A0EFE33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9FB62AF-6246-4EF3-B901-6D919A0EFE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FB62AF-6246-4EF3-B901-6D919A0EFE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FB62AF-6246-4EF3-B901-6D919A0EFE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FB62AF-6246-4EF3-B901-6D919A0EFE33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8564C8B2-4834-493F-BA5C-4B0E1C8CAAD6}
+	EndGlobalSection
+EndGlobal

@@ -7,9 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Protobuf Include="..\..\AspNetCore\GrpcServiceSample\Protos\*.proto" ProtoRoot="..\..\AspNetCore\GrpcServiceSample\Protos\" GrpcServices="None" />
-  </ItemGroup>
+   <ItemGroup>
+    <Protobuf Include="..\GrpcServiceSample\Protos\*.proto" ProtoRoot="..\GrpcServiceSample\Protos\" GrpcServices="None" />
+  </ItemGroup> 
 
   <ItemGroup>
     <PackageReference Include="Dapr.Client" Version="1.2.0" />
