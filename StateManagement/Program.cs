@@ -16,7 +16,8 @@ namespace Samples.Client
             new StateStoreExample(),
             new StateStoreTransactionsExample(),
             new StateStoreETagsExample(),
-            new SecretStoreManagement()
+            new SecretStoreManagement(),
+            new StateStoreTTLExample()
         };
 
         static async Task<int> Main(string[] args)
