@@ -8,7 +8,7 @@ spec:
   version: v1
   metadata:
   - name: connectionString # Required    
-    value: "Endpoint=sb://dapr-servicebus-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=ERbZ3DoQ2fGdQK8GbXbHYivvqc5nlh0WbTEO69oTOmk="
+    value: "Endpoint=sb://dapr-servicebus-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xxx"
   # - name: ttlInSeconds # It doesn' work for this topic, just only in code for each message !
   #   value: "10"
 
