@@ -16,7 +16,7 @@ namespace Samples.Client
             _logger = logger;
         }
 
-        //[Topic("pubsub","forecast")]
+        // [Topic("pubsub","forecast")] // Also you can use weatherforecast-subscription.yaml component instead
         [HttpPost]        
         public async Task<ActionResult> Get([FromBody] WeatherForecast weatherForecast)
         {

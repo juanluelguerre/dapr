@@ -42,6 +42,11 @@ See: [StateStoreTransactionsExample.cs](./StateStoreTransactionsExample.cs) for 
 
 See [StateStoreETagsExample.cs](./StateStoreETagsExample.cs) for an example of using `DaprClient` for optimistic concurrency control with the state store.
 
+## TTL
+Runing the application, using TTL:
+```
+dapr run --app-id DaprClient --components-path ./components/local -- dotnet run 4
+```
 
 # Working with Azure (Key Vault)
 1. Create KeyVault, like: "dapr-keyvault"

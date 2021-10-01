@@ -10,5 +10,7 @@ spec:
     value: localhost:6379
   - name: redisPassword
     value: ""
+  # - name: ttlInSeconds
+  #   value: "10" # 10 secs
 
 # Default Configuration. If so no need "--component-path" argument.
