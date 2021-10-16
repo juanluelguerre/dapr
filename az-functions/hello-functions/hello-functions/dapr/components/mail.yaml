@@ -1,0 +1,19 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: mail  
+spec:
+  type: bindings.twilio.sendgrid  
+  metadata:
+  - name: emailFrom
+    value: "jlguerrero@gmail.com"
+  - name: emailTo
+    value: "jlguerrero@gmail.com"
+  - name: subject
+    value: "Dapr using azure functions"
+  - name: apiKey
+    secretKeyRef:
+      name: sendgridKey      
+
+auth:
+  secretStore: secretstore

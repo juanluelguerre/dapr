@@ -2,6 +2,10 @@
 
 ![Hello Function](./assets/dapr-hello-functions.png)
 
+
+# Quickstart
+https://github.com/dapr/azure-functions-extension/blob/master/docs/quickstart.md
+
 # Create¡im from scratch
 ```
 mkdir hello-functions
@@ -23,6 +27,6 @@ az keyvault secret download --vault-name dapr-keyvault --name CertName --encodin
 
 # Running sample
 
-`dapr run --app-id hello-functions --dapr-http-port 3501 -- func start -p 7071`
+`dapr run --app-id hello-functions --dapr-http-port 3501 -p 3001 --components-path .\dapr\components -- func host start`
 
 
