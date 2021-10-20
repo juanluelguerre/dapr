@@ -16,12 +16,12 @@ namespace hello_functions
             [DaprPublish(PubSubName = "pubsub", Topic = "greatings")] IAsyncCollector<string> pubsub,
             ILogger log)
         {
-            log.LogInformation($"C# Queue trigger function processed a item queue");
+            log.LogInformation($"C# Queue trigger function initiated");
 
             await state.AddAsync(data.Name);
             await pubsub.AddAsync(data.Name);
 
-            log.LogInformation($"C# Queue trigger function processed: {data.Name}");            
+            log.LogInformation($"C# Queue trigger function processed: {data.Name}");
         }
     }
 

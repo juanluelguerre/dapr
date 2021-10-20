@@ -1,0 +1,15 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: queuebinding
+  namespace: default
+spec:
+  type: bindings.azure.storagequeues
+  version: v1
+  metadata:
+  - name: storageAccount
+    value: "daprbindings"
+  - name: storageAccessKey
+    value: "<INTRODUCE-HERE-YOUR-AZURE-SOTOAGE-KEY>"
+  - name: queue
+    value: "queuedemo1"

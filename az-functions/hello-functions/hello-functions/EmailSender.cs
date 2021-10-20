@@ -1,33 +1,40 @@
 using CloudNative.CloudEvents;
 using Dapr.AzureFunctions.Extension;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace hello_functions
 {
-    public static class EmailSender
+public static class EmailSender
+{
+    [FunctionName("EmailSender")]
+    public static async Task<IActionResult> Run(
+        [DaprTopicTrigger("pubsub", Topic = "greatings")] CloudEvent @event,
+        [DaprSecret("secretstore", "sampleKey")] IDictionary<string, string> secret,
+        [DaprBinding(BindingName = "mail", Operation = "create")] IAsyncCollector<DaprBindingMessage> mailer,
+        // TODO: Issue: https://github.com/dapr/azure-functions-extension/issues/73
+        // [DaprInvoke(AppId = "webapp1", MethodName = "OneName", HttpVerb = "post")] IAsyncCollector<InvokeMethodParameters> invoke,
+        ILogger log)
     {
-        [FunctionName("EmailSender")]
-        public static async Task Run(
-            [DaprTopicTrigger("pubsub", Topic = "greatings")] CloudEvent @event,            
-            [DaprSecret("secretstore", "sendgridKey")] IDictionary<string, string> secret,
-            [DaprBinding(BindingName = "mail", Operation = "create")] IAsyncCollector<DaprBindingMessage> msg,
-            [DaprInvoke(AppId = "webapp1", MethodName = "OneName", HttpVerb = "post")] IAsyncCollector<InvokeMethodParameters> output,
-            ILogger log)
-        {
-            log.LogInformation($"C# ServiceBus topic trigger function processed message from Service Bus for '{@event.Data}'");
+        log.LogInformation($"C# ServiceBus topic trigger function initiated");
 
-            
-            await output.AddAsync(new InvokeMethodParameters() { Body = $"User '{@event.Data}' has beed add to the system....." });
+        var msg = $"Just a sample: User '{@event.Data}' are using '{secret["sampleKey"]}' key.";
 
-            await msg.AddAsync(new DaprBindingMessage($"User '{@event.Data}' has beed add to the system....."));
+        // TODO: Issue: https://github.com/dapr/azure-functions-extension/issues/73
+        // var content = new InvokeMethodParameters()
+        // {
+        //     Body = msg
+        // };
+        // await invoke.AddAsync(content);
 
-            // log.LogInformation($"And here the secret: {secret["azureStorageKey"]}");
+        await mailer.AddAsync(new DaprBindingMessage(msg));
 
-        }
+        log.LogInformation($"Email Sender end !");
+
+        return new OkResult();
     }
+}
 }

@@ -14,11 +14,10 @@ namespace WebApp1.Controllers
             _logger = logger;
         }
 
-        [HttpPost("{name}")]
-        public void Post(string name)
+        [HttpPost]
+        public void Post([FromBody] string name)
         {
-            _logger.LogInformation($"Service WebApp1 called for '{name}'");
-            // return $"Hello {name}";
+            _logger.LogInformation($"Service WebApp1 called for '{name}'");            
         }
     }
 }

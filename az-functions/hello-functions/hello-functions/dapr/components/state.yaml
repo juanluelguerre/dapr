@@ -8,13 +8,13 @@ spec:
   version: v1
   metadata:
   - name: accountName
-    value: "daprdemo1" # <- Update according to Azure Storage Account name
+    value: daprdemo1
   - name: accountKey
     secretKeyRef:
       name: azureStorageKey
       key:  azureStorageKey
   - name: tableName
-    value: daprdemotable # <- Update according to Azure Storage table name, once you shoud be created previously
+    value: daprdemotable
 
 auth:
-  secretStore: secretstore # <- Component name must be exist
+  secretStore: secretstore

@@ -6,9 +6,9 @@ spec:
   type: bindings.twilio.sendgrid  
   metadata:
   - name: emailFrom
-    value: "jlguerrero@gmail.com"
+    value: "<YOUR-EMAIL>"
   - name: emailTo
-    value: "jlguerrero@gmail.com"
+    value: "<YOUR-EMAIL>"
   - name: subject
     value: "Dapr using azure functions"
   - name: apiKey
