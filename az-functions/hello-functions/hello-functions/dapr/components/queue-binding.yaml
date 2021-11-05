@@ -9,7 +9,12 @@ spec:
   metadata:
   - name: storageAccount
     value: "daprbindings"
-  - name: storageAccessKey
-    value: "<INTRODUCE-HERE-YOUR-AZURE-SOTOAGE-KEY>"
+  - name: storageAccessKey    
+    secretKeyRef:
+      name: queueStorageKey
+      key: queueStorageKey
   - name: queue
     value: "queuedemo1"
+
+auth:
+  secretStore: secretstore

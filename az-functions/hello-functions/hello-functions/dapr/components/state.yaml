@@ -9,12 +9,12 @@ spec:
   metadata:
   - name: accountName
     value: daprdemo1
-  - name: accountKey
-    secretKeyRef:
-      name: azureStorageKey
-      key:  azureStorageKey
   - name: tableName
-    value: daprdemotable
+    value: daprdemotable    
+  - name: accountKey    
+    secretKeyRef:
+      name: tableStorageKey
+      key: tableStorageKey
 
 auth:
   secretStore: secretstore
