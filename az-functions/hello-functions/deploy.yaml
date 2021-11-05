@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-functions
+  namespace: default
+spec:
+  selector:
+    app: hello-functions
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-functions
+  namespace: default
+  labels:
+    app: hello-functions
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-functions
+  template:
+    metadata:
+      labels:
+        app: hello-functions
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "hello-functions"
+        # Only define port if Dapr triggers are included
+        dapr.io/app-port: "3001"
+        # dapr.io/config: "tracing"
+    spec:
+      containers:
+      - name: hello-functions
+        image: k8sappsregistry.azurecr.io/hello-functions:latest # Replace with your container registry and image name.
+        ports:
+        # Port for HTTP triggered functions
+        - containerPort: 80
