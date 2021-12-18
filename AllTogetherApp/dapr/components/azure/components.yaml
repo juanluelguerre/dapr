@@ -1,27 +1,10 @@
-# - name: pubsub
-#   type: pubsub.azure.servicebus
-#   version: v1
-#   metadata:
-#   - name: connectionString    
-#     secretRef:
-#       name: serviceBusConnectionString
-#       key: serviceBusConnectionString  # The key of the secret
-#   auth:
-#     secretStore: secretstore
-
-- name: secretstore
-  type: secretstores.azure.keyvault
+- name: pubsub
+  type: pubsub.azure.servicebus
   version: v1
   metadata:
-  - name: vaultName
-    value: dapr-keyvault
-  - name: spnTenantId
-    secretRef: tenantid # secretRef must be lower case
-  - name: spnClientId    
-    secretRef: clientid
-  - name: spnCertificate
-    secretRef: certificate
-      
+  - name: connectionString    
+    secretRef: connectionstring 
+
 - name: statestore
   type: state.azure.tablestorage
   version: v1
@@ -31,5 +14,4 @@
   - name: tableName
     value: daprdemotable    
   - name: accountKey    
-    secretRef: storageaccountkey
-
+    secretRef: accountkey     
