@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: statestore
+  name: counter-store
   namespace: default
 spec:
   type: state.azure.tablestorage

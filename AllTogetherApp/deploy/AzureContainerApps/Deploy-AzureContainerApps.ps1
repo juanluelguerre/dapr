@@ -1,11 +1,11 @@
 # REF: https://github.com/andreatosato/dapr-cloudchampion/blob/azure-container-apps/deploy/AzureContainerApps/CreateEnv.ps1
 
-$STORAGE_ACCOUNT_KEY=""
-$SERVICE_BUS_CONNECTION_STRING=""
-$RESOURCE_GROUP="k8s-Apps"
+$STORAGE_ACCOUNT_KEY="<YOUR-STORAGE-ACCOUNT-KEY>"
+$SERVICE_BUS_CONNECTION_STRING="<YOUR-SERVICE-BUS-CONNECTION-STRING>"
+$RESOURCE_GROUP="<YOUR-RESOURCE-GROUP>"
 $CONTAINERAPPS_ENVIRONMENT="AllTogetherAppEnv"
-$ACR="k8sappsregistry.azurecr.io"
-$ACR_User="k8sappsregistry"
+$ACR="<YOUR-ACR>.azurecr.io"
+$ACR_User="<YOUR-ACR-USER>"
 $ACR_Password=$(az acr credential show -n $ACR --query "passwords[0].value" -o tsv)
 $LOG_ANALYTICS_WORKSPACE="AllTogetherAppWorkspaceLogs"
 $LOCATION="northeurope" # <northeurope | canadacentral>  Currenty available just for northeurope and canadacentral"
@@ -36,7 +36,7 @@ az containerapp create `
  --registry-password $ACR_Password `
  --image k8sappsregistry.azurecr.io/alltogether.counterservice:latest `
  --target-port 80 `
- --ingress 'external' `
+ --ingress 'internal' `
  --min-replicas 1 `
  --max-replicas 1 `
  --enable-dapr `
@@ -55,7 +55,7 @@ az containerapp create `
  --registry-password $ACR_Password `
  --image k8sappsregistry.azurecr.io/alltogether.weatherservice:latest `
  --target-port 80 `
- --ingress 'external' `
+ --ingress 'internal' `
  --min-replicas 1 `
  --max-replicas 1 `
  --enable-dapr `

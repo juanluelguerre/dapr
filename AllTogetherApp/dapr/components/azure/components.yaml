@@ -5,7 +5,7 @@
   - name: connectionString    
     secretRef: connectionstring 
 
-- name: statestore
+- name: counter-store
   type: state.azure.tablestorage
   version: v1
   metadata:
