@@ -1,0 +1,17 @@
+- name: pubsub
+  type: pubsub.azure.servicebus
+  version: v1
+  metadata:
+  - name: connectionString    
+    secretRef: connectionstring 
+
+- name: counter-store
+  type: state.azure.tablestorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: daprdemo1
+  - name: tableName
+    value: daprdemotable    
+  - name: accountKey    
+    secretRef: accountkey     

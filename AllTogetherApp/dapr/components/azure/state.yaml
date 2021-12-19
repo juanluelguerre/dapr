@@ -1,0 +1,20 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: counter-store
+  namespace: default
+spec:
+  type: state.azure.tablestorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: daprdemo1
+  - name: tableName
+    value: daprdemotable    
+  - name: accountKey    
+    secretKeyRef:
+      name: tableStorageKey
+      key: tableStorageKey
+
+auth:
+  secretStore: secretstore
