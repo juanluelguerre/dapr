@@ -1,0 +1,27 @@
+openapi: 3.0.1
+info:
+  title: CounterService
+  version: v1
+paths:
+  /IncrementEvent/increment:
+    post:
+      tags:
+        - IncrementEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int32
+          text/json:
+            schema:
+              type: integer
+              format: int32
+          application/*+json:
+            schema:
+              type: integer
+              format: int32
+      responses:
+        '200':
+          description: Success
+components: {}
