@@ -3,24 +3,31 @@
 # REF: https://docs.microsoft.com/en-us/azure/api-management/how-to-deploy-self-hosted-gateway-azure-kubernetes-service
 #
 # NOTE: Before deploying to a production environment, please review the documentation -> https://aka.ms/self-hosted-gateway-production
+      # annotations:
+      #   dapr.io/enabled: "true"
+      #   dapr.io/app-id: "alltogether"    
+      #   dapr.io/config: "tracing"    
+      #   dapr.io/log-as-json: "true"
+      #   dapr.io/log-level: "debug"      
+
 # NOTE: Before deploying to a production environment, please review the documentation -> https://aka.ms/self-hosted-gateway-production
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: alltogether-apim-gateway-env
+  name: altogether-env
 data:
-  config.service.endpoint: "https://elguerreapim.management.azure-api.net/subscriptions/0f64236e-5a90-4d9c-8bd5-c0bc384e0081/resourceGroups/k8s-Apps/providers/Microsoft.ApiManagement/service/elguerreapim?api-version=2021-01-01-preview"
+  config.service.endpoint: "https://elguerre-apim.management.azure-api.net/subscriptions/599c98c2-aa8d-479a-940d-ee0d3f1e5d2e/resourceGroups/puck/providers/Microsoft.ApiManagement/service/elguerre-apim?api-version=2021-01-01-preview"
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alltogether-apim-gateway
+  name: altogether
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: alltogether-apim-gateway
+      app: altogether
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -29,17 +36,17 @@ spec:
   template:
     metadata:
       labels:
-        app: alltogether-apim-gateway
+        app: altogether
       annotations:
         dapr.io/enabled: "true"
         dapr.io/app-id: "alltogether"    
         dapr.io/config: "tracing"    
         dapr.io/log-as-json: "true"
-        dapr.io/log-level: "debug"        
+        dapr.io/log-level: "debug"            
     spec:
       terminationGracePeriodSeconds: 60
       containers:
-      - name: alltogether-apim-gateway
+      - name: altogether
         image: mcr.microsoft.com/azure-api-management/gateway:latest
         ports:
         - name: http
@@ -59,16 +66,16 @@ spec:
         - name: config.service.auth
           valueFrom:
             secretKeyRef:
-              name: alltogether-apim-gateway-token
+              name: altogether-token
               key: value
         envFrom:
         - configMapRef:
-            name: alltogether-apim-gateway-env
+            name: altogether-env
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: alltogether-apim-gateway
+  name: altogether
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
@@ -80,4 +87,4 @@ spec:
     port: 443
     targetPort: 8081
   selector:
-    app: alltogether-apim-gateway
+    app: altogether
