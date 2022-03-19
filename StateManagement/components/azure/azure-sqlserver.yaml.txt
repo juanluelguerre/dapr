@@ -8,7 +8,7 @@ spec:
   version: v1
   metadata:
     - name: connectionString            
-      value: Server=tcp:dapr-sqlserver.database.windows.net,1433;Initial Catalog=dapr-sqldb;Persist Security Info=False;User ID=jlguerrero;Password=Developer01*.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+      value: "xxx"
     - name: tableName
       value: dapr  # Optional. defaults to "state"
     - name: schema
