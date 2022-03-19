@@ -40,11 +40,11 @@ namespace Samples.Client
             // TODO: Comment and UnComment to use TTL
             var metadata = new Dictionary<string, string>
             {
-               {"ttlInSeconds", "-1"},
+              // {"ttlInSeconds", "-1"},
                
                // https://github.com/dapr/components-contrib/pull/1071
                // https://github.com/dapr/dapr/pull/3604
-               { "asbsessionId", "123" },
+               //{ "asbsessionId", "123" },
                //{ "MessageId", "{701332E1-B37B-4D29-AA0A-E367906C206E}" },
                //{ "TimeToLive", "90" },
                //{ "CorrelationId", "{701332F3-B37B-4D29-AA0A-E367906C206E}" },
@@ -52,9 +52,9 @@ namespace Samples.Client
                //{ "DeliveryCount", "2" },
                //{ "To", "http,//contoso.com" },
                //{ "ReplyTo", "http,//fabrikam.com" },
-               { "asbsenqueuedTimeUtc", "Sun, 06 Nov 1994 08,49,37 GMT" },
-               { "asbscheduledEnqueueTimeUtc", "Sun, 06 Nov 1994 08,49,37 GMT" }
-               //// {"ScheduledEnqueueTimeUtc", DateTime.Now.AddDays(1).ToString("dd/MM/yyyy hh,mm,ss")}
+               //{ "asbsenqueuedTimeUtc", "Sun, 06 Nov 1994 08,49,37 GMT" },
+               //{ "asbscheduledEnqueueTimeUtc", "Sun, 06 Nov 1994 08,49,37 GMT" }
+               { "ScheduledEnqueueTimeUtc", DateTime.Now.AddDays(1).ToString("dd/MM/yyyy hh,mm,ss") }
                //// {"label", "test-label"},
             };
 

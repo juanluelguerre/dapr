@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StateManagement": {
+      "commandName": "Project",
+      "commandLineArgs": "0"
+    }
+  }
+}

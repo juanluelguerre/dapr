@@ -23,7 +23,7 @@ namespace Samples.Client
 
         public override async Task RunAsync(CancellationToken cancellationToken)
         {
-            using var client = new DaprClientBuilder().Build();
+            using var daprClient = new DaprClientBuilder().Build();
 
             var state = new Widget() { Size = "small", Color = "yellow" };
 
@@ -33,7 +33,7 @@ namespace Samples.Client
                 { "ttlInSeconds", $"{ttlSecs}" } 
             };
 
-            await client.SaveStateAsync(storeName,
+            await daprClient.SaveStateAsync(storeName,
                                 stateKeyName,
                                 state,
                                 null,
@@ -48,7 +48,7 @@ namespace Samples.Client
 
             Console.WriteLine($" -> [TTL Apply after {ttlSecs} secs] Now, if you check your State Store the state key doesn't exist anymore !");
 
-            state = await client.GetStateAsync<Widget>(storeName,
+            state = await daprClient.GetStateAsync<Widget>(storeName,
                                                     stateKeyName,
                                                     cancellationToken: cancellationToken);
             if (state == null)

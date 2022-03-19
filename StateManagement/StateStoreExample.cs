@@ -20,17 +20,17 @@ namespace Samples.Client
 
         public override async Task RunAsync(CancellationToken cancellationToken)
         {
-            using var client = new DaprClientBuilder().Build();
+            using var daprClient = new DaprClientBuilder().Build();
 
             var state = new Widget() { Size = "small", Color = "yellow" };
 
-            await client.SaveStateAsync(storeName,
+            await daprClient.SaveStateAsync(storeName,
                                 stateKeyName,
                                 state,                                
                                 cancellationToken: cancellationToken);
             Console.WriteLine("Saved State!");
 
-            state = await client.GetStateAsync<Widget>(storeName,
+            state = await daprClient.GetStateAsync<Widget>(storeName,
                                                     stateKeyName,
                                                     cancellationToken: cancellationToken);
             if (state == null)
