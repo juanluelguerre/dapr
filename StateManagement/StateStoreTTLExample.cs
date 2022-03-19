@@ -14,7 +14,7 @@ namespace Samples.Client
 {
     public class StateStoreTTLExample : Example
     {
-        private static readonly int ttlSecs = 5;
+        private static readonly int ttlSecs = 8;
         
         private static readonly string stateKeyName = "Widget";
         private static readonly string storeName = "statestore";

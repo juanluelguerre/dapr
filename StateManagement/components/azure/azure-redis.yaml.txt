@@ -8,8 +8,8 @@ spec:
   version: v1
   metadata:
   - name: redisHost
-    value: <NAME>.redis.cache.windows.net:6380
+    value: dapr-redis-demos.redis.cache.windows.net:6380
   - name: redisPassword    
-    value:  "<AZURE-REDIS-CACHE-KEY/PASSWORD>"
+    value:  "XfDdkHGFaLDEsOmmnK6n4z4iRfrXAEr6KAzCaKozVV4="
   - name: enableTLS # <-- This is the important part missing in the docs
     value: "true"   

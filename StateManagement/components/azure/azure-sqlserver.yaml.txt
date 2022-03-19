@@ -1,0 +1,21 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+  namespace: default
+spec:
+  type: state.sqlserver
+  version: v1
+  metadata:
+    - name: connectionString            
+      value: Server=tcp:dapr-sqlserver.database.windows.net,1433;Initial Catalog=dapr-sqldb;Persist Security Info=False;User ID=jlguerrero;Password=Developer01*.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    - name: tableName
+      value: dapr  # Optional. defaults to "state"
+    - name: schema
+      value: dbo # Optional. defaults to "dbo"
+  # - name: keyType
+  #   value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
+  # - name: keyLength
+  #   value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType
+  # - name: indexedProperties
+  #   value: <INDEXED-PROPERTIES> # Optional. List of IndexedProperties.

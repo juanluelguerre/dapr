@@ -19,15 +19,17 @@ Mostrar el Startup.cs y el appsettings, con la nueva configuración.
 ################################################################################################################
 3) ----  STATE MANAGEMENT  -----
 
- -> dapr run --app-id DaprClient --components-path .\components\local
+ -> dapr run --app-id stateapp--components-path .\components\local
 
 Local:
  - Run application from Visual Studio and set argument 0 and debug.
  - Show hoy a new value is added into Redis Local.
  - Use Visual Studio Pluging to connect to Redis and show data stored.
  - Change data manually  and move brackpoint in VS to see how the new value is retrieved.
+ - Show all the times the componet used is local....
 
- 
+Azure RedIs:
+ -> dapr run --app-id DaprClient --components-path .\components\azure
 
 Secret Store: 
 dapr run --app-id DaprClient --components-path .\components\ -- dotnet run 0
