@@ -8,14 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\..\AspNetCore\GrpcServiceSample\Protos\*.proto" ProtoRoot="..\..\AspNetCore\GrpcServiceSample\Protos\" GrpcServices="None" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Dapr.Client" Version="1.2.0" />
-    <PackageReference Include="Google.Protobuf" Version="3.13.0" />
-    <PackageReference Include="Google.Api.CommonProtos" Version="2.2.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.35.0" PrivateAssets="All" />
+    <PackageReference Include="Dapr.Client" Version="1.6.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Google.Api.CommonProtos" Version="2.5.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.44.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
