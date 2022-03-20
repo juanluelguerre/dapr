@@ -5,7 +5,7 @@ services:
     image: "alltogether.website"
     build:
       context: ./WebSite
-      dockerfile: WebSite/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 5000:80
       - 5001:443      
@@ -38,7 +38,7 @@ services:
     image: "alltogether.counterservice"
     build:
       context: ./CounterService
-      dockerfile: CounterService/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 5002:80
       - 5004:443     
@@ -71,7 +71,7 @@ services:
     image: "alltogether.weatherservice"
     build:
       context: ./WeatherService
-      dockerfile: WeatherService/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 5003:80
       - 5005:443      
