@@ -23,7 +23,7 @@ namespace BingingApi.Controllers
         {
             _logger.LogInformation("Binding event (demo1) received from Azure Storage Queue !!!");
 
-            _logger.LogInformation($"-> Today ({forecast.Date.DayOfWeek}) will have {forecast.TemperatureC}C.");
+            _logger.LogInformation($"-> Today ... {forecast.Summary}... ({forecast.Date.DayOfWeek}) will have {forecast.TemperatureC}C.");
         }
     }
 }

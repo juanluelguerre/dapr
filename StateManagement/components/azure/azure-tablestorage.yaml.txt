@@ -10,6 +10,6 @@ spec:
   - name: accountName
     value: "daprdemo1" # <- Update according to Azure Storage Account name
   - name: accountKey
-    value: xxx
+    value: "QhBexpYfTbtBSIGJt3dtg3cS1FkgnbmbPj31ZpII7Ak0aKZDUHFc3fbx3cpkwWhyzFMq/LnHq6UnLwB8x0iGMw=="
   - name: tableName
     value: daprdemotable # <- Update according to Azure Storage table name, once you shoud be created previously

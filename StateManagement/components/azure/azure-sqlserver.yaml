@@ -7,13 +7,13 @@ spec:
   type: state.sqlserver
   version: v1
   metadata:
-    - name: connectionString            
-      value: "xxx"
+    - name: connectionString             
+      value: "Server=dapr-sqlserver.database.windows.net;Database=master;User Id=jlguerrero;Password=Developer01*.;" # if master is specified as database, a new one "dapr" will be created and used
     - name: tableName
-      value: dapr  # Optional. defaults to "state"
+      value: state  # Optional. defaults to "state"
     - name: schema
       value: dbo # Optional. defaults to "dbo"
-  # - name: keyType
+  ## - name: keyType
   #   value: <REPLACE-WITH-KEY-TYPE>  # Optional. defaults to "string"
   # - name: keyLength
   #   value: <KEY-LENGTH> # Optional. defaults to 200. Yo be used with "string" keyType

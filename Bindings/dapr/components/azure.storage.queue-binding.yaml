@@ -8,10 +8,10 @@ spec:
   version: v1
   metadata:
   - name: storageAccount
-    value: "<AZURE-STORAGE-ACCOUNT-NAMNE>"
+    value: "daprbindings"
   - name: storageAccessKey
-    value: "<AZURE-STORATE-ACCOUNT-KEY>"
+    value: "O2JkBFMa8DJ+bA08PqjMzdqLtdXQLaNdCl4zyBko06kQJasbNXwLa7SJoTJq9vCQ5oi+5OWda1MItGAxRNXEJA=="
   - name: queue
-    value: "<QUEUE-NAME>"
+    value: "queuedemo1"
   - name: ttlInSeconds
     value: "60"
